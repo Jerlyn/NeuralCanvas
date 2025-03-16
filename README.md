@@ -26,7 +26,7 @@ Neural Canvas is a showcase of my experiments with generative AI, interactive ex
 
 ## View the Site
 
-Visit [Neural Canvas](https://jerlyn.github.io/neural-canvas)
+Visit [Neural Canvas](https://jerlyn.github.io/NeuralCanvas)
 
 ## License
 
