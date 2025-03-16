@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Canvas | Jerlyn's Experimental Portfolio</title>
+    <title>Jerlyn's Neural Canvas | Experimental Portfolio</title>
     <style>
         :root {
-            --primary: #2b2d42;
-            --secondary: #8d99ae;
-            --accent: #ef233c;
+            --primary: #164773;
+            --secondary: #0B2B40;
+            --accent: #1E5959;
             --light: #edf2f4;
-            --dark: #0b090a;
+            --dark: #0B2B40;
+            --gradient-1: #3B8C6E;
+            --gradient-2: #89D99D;
         }
         
         * {
@@ -25,6 +27,7 @@
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            font-weight: 400;
         }
         
         a {
@@ -53,7 +56,7 @@
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--accent), #f5cb5c);
+            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -64,6 +67,8 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             max-width: 600px;
+            color: var(--light);
+            font-weight: 400;
         }
         
         .particles-js {
@@ -83,7 +88,7 @@
         }
         
         .card {
-            background-color: rgba(45, 49, 66, 0.8);
+            background-color: var(--secondary);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -95,7 +100,7 @@
         
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(11, 43, 64, 0.4);
         }
         
         .card-img {
@@ -129,25 +134,27 @@
         .card-text {
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
-            color: var(--secondary);
+            color: var(--light);
+            font-weight: 400;
         }
         
         .tag {
             display: inline-block;
-            background-color: rgba(239, 35, 60, 0.2);
-            color: var(--accent);
+            background-color: rgba(30, 89, 89, 0.4);
+            color: var(--light);
             padding: 0.3rem 0.8rem;
             border-radius: 30px;
             font-size: 0.8rem;
+            font-weight: 500;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
-            border: 1px solid rgba(239, 35, 60, 0.3);
+            border: 1px solid rgba(30, 89, 89, 0.5);
         }
         
         .btn {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: var(--accent);
+            background-color: var(--gradient-1);
             color: var(--light);
             border-radius: 5px;
             font-weight: 600;
@@ -156,14 +163,14 @@
         }
         
         .btn:hover {
-            background-color: #d90429;
+            background-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 35, 60, 0.4);
+            box-shadow: 0 5px 15px rgba(30, 89, 89, 0.4);
         }
         
         .about-section {
             padding: 4rem 0;
-            background-color: rgba(11, 9, 10, 0.5);
+            background-color: var(--secondary);
             border-radius: 10px;
             margin: 3rem 0;
             backdrop-filter: blur(10px);
@@ -181,7 +188,7 @@
             width: 100%;
             max-width: 300px;
             border-radius: 50%;
-            border: 5px solid var(--accent);
+            border: 5px solid var(--gradient-1);
         }
         
         footer {
@@ -243,7 +250,7 @@
         }
 
         :focus {
-            outline: 3px solid var(--accent);
+            outline: 3px solid var(--gradient-2);
             outline-offset: 2px;
         }
 
@@ -263,9 +270,10 @@
             width: auto;
             height: auto;
             padding: 10px;
-            background: var(--accent);
+            background: var(--gradient-1);
             color: var(--light);
             z-index: 1000;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -275,7 +283,7 @@
     
     <header>
         <div class="container">
-            <h1 class="site-name fade-in">Neural Canvas</h1>
+            <h1 class="site-name fade-in">Jerlyn's Neural Canvas</h1>
             <p class="tagline fade-in">Exploring the intersection of code, creativity, and artificial intelligence.</p>
         </div>
     </header>
@@ -401,7 +409,7 @@
                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i> Twitter</a>
             </div>
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Neural Canvas | Designed & Developed by Jerlyn</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Jerlyn's Neural Canvas | Designed & Developed by Jerlyn</p>
         </div>
     </footer>
     
