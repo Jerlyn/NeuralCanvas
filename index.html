@@ -1,577 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jerlyn's Neural Canvas | Experimental Portfolio</title>
-    <style>
-        :root {
-            --primary: #164773;
-            --secondary: #0B2B40;
-            --accent: #1E5959;
-            --light: #edf2f4;
-            --dark: #0B2B40;
-            --gradient-1: #3B8C6E;
-            --gradient-2: #89D99D;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--primary);
-            color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-weight: 400;
-        }
-        
-        a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        a:hover {
-            color: var(--gradient-2);
-            text-decoration: underline;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        header {
-            padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .site-name {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            color: var(--light);
-            font-weight: 400;
-        }
-        
-        .particles-js {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-        
-        .card {
-            background-color: var(--secondary);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(141, 153, 174, 0.2);
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(11, 43, 64, 0.4);
-        }
-        
-        .card-img {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-img::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
-        }
-        
-        .card-content {
-            padding: 1.5rem;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--light);
-        }
-        
-        .card-text {
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--light);
-            font-weight: 400;
-        }
-        
-        .tag {
-            display: inline-block;
-            background-color: rgba(30, 89, 89, 0.4);
-            color: var(--light);
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid rgba(30, 89, 89, 0.5);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--gradient-1);
-            color: var(--light);
-            border-radius: 5px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .btn::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--accent);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 89, 89, 0.4);
-            color: var(--light);
-            text-decoration: underline;
-        }
-        
-        .btn:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
-        .about-section {
-            padding: 4rem 0;
-            background-color: var(--secondary);
-            border-radius: 10px;
-            margin: 3rem 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(141, 153, 174, 0.1);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .profile-img {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 50%;
-            border: 5px solid var(--gradient-1);
-        }
-        
-        footer {
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 2rem;
-            background-color: var(--dark);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .social-links a {
-            margin: 0 1rem;
-            font-size: 1.5rem;
-        }
-        
-        /* Animation Classes */
-        .fade-in {
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .profile-img {
-                margin: 0 auto;
-            }
-            .site-name {
-                font-size: 2.5rem;
-            }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerlyn's Neural Canvas | Experimental Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Raleway:wght@400;600;700&display=swap');
 
-        /* Accessibility Enhancements */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
+:root {
+    --primary: #164773;
+    --secondary: #0B2B40;
+    --accent: #1E5959;
+    --light: #edf2f4;
+    --dark: #0B2B40;
+    --gradient-1: #3B8C6E;
+    --gradient-2: #89D99D;
+    --title-font: 'Playfair Display', serif;
+    --body-font: 'Raleway', sans-serif;
+    --heading-font: 'Montserrat', sans-serif;
+}
 
-        :focus {
-            outline: 3px solid var(--gradient-2);
-            outline-offset: 2px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--body-font);
+}
 
-        .skip-to-content {
-            position: absolute;
-            left: -9999px;
-            top: auto;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-        }
-        
-        .skip-to-content:focus {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: auto;
-            height: auto;
-            padding: 10px;
-            background: var(--gradient-1);
-            color: var(--light);
-            z-index: 1000;
-            font-weight: bold;
-        }
-    </style>
+body {
+    background-color: var(--primary);
+    color: var(--light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 400;
+}
+
+a {
+    color: var(--light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--gradient-2);
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+header {
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.site-name {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-family: var(--title-font);
+    letter-spacing: 1px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: var(--light);
+    font-weight: 400;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.card {
+    background: linear-gradient(145deg, var(--secondary), #0a1f2e);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(141, 153, 174, 0.15);
+    display: flex;
+    flex-direction: column;
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.card:hover {
+    transform: perspective(1000px) rotateY(5deg) translateY(-15px);
+    box-shadow: 0 20px 40px rgba(11, 43, 64, 0.5);
+}
+
+.card-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.card-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(11, 43, 64, 0.8));
+    z-index: 1;
+}
+
+.card-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="%233B8C6E" stroke-width="0.5" stroke-dasharray="5,5" opacity="0.2"/></svg>');
+    opacity: 0.1;
+    z-index: 2;
+}
+
+.card-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+    position: relative;
+}
+
+.card-content::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--gradient-2);
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--light);
+    font-family: var(--title-font);
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+.card-text {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: rgba(237, 242, 244, 0.8);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.btn-container {
+    margin-top: auto;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.9rem 1.8rem;
+    background-color: var(--gradient-2);
+    color: var(--dark);
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-family: var(--heading-font);
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(137, 217, 157, 0.2);
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--gradient-1);
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn svg {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(59, 140, 110, 0.3);
+    color: var(--light);
+}
+
+.btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn:hover svg {
+    transform: translateX(5px);
+}
+
+/* Disabled button styles */
+.btn-disabled {
+    background-color: #5a6b6a;
+    color: rgba(237, 242, 244, 0.7);
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.btn-disabled::after {
+    display: none;
+}
+
+.card-disabled {
+    opacity: 0.7;
+    transform: none;
+}
+
+.card-disabled:hover {
+    transform: none;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-disabled .project-icon {
+    background: #5a6b6a;
+}
+
+.card-disabled .card-content::before {
+    background: #5a6b6a;
+}
+
+.coming-soon-tag {
+    display: inline-block;
+    background-color: rgba(90, 107, 106, 0.3);
+    color: var(--light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(90, 107, 106, 0.5);
+}
+
+/* Updated About Section Styles */
+.about-section {
+    padding: 5rem 0;
+    background: linear-gradient(145deg, var(--secondary), #0a1f2e);
+    border-radius: 12px;
+    margin: 4rem 0;
+    border: 1px solid rgba(141, 153, 174, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="%233B8C6E" stroke-width="0.5" stroke-dasharray="5,5" opacity="0.2"/></svg>');
+    opacity: 0.03;
+    z-index: 0;
+}
+
+.about-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.about-section h2 {
+    font-family: var(--title-font);
+    color: var(--light);
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 1rem;
+}
+
+.about-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border: 2px dashed var(--gradient-1);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.profile-img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 50%;
+    border: 5px solid var(--gradient-1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 35px rgba(59, 140, 110, 0.4);
+}
+
+.about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(237, 242, 244, 0.9);
+}
+
+.about-text .btn-container {
+    margin-top: 1.5rem;
+}
+
+.about-text .btn {
+    background-color: var(--gradient-2);
+    color: var(--dark);
+}
+
+footer {
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 2rem;
+    background-color: var(--dark);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    margin: 0 1rem;
+    font-size: 1.5rem;
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr 1.5fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .about-section {
+        padding: 4rem 0;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+    
+    .about-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .profile-img {
+        max-width: 260px;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .about-text .btn-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .site-name {
+        font-size: 2.5rem;
+    }
+}
+
+/* Accessibility Enhancements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+:focus {
+    outline: 3px solid var(--gradient-2);
+    outline-offset: 2px;
+}
+
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-to-content:focus {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background: var(--gradient-1);
+    color: var(--light);
+    z-index: 1000;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: var(--title-font);
+    color: var(--light);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.project-icon {
+    position: absolute;
+    bottom: -25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(11, 43, 64, 0.3);
+    z-index: 10;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .project-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+</style>
 </head>
 <body>
-    <a href="#main" class="skip-to-content">Skip to main content</a>
-    <div id="particles-js" class="particles-js"></div>
-    
-    <header>
-        <div class="container">
-            <h1 class="site-name fade-in">Jerlyn's Neural Canvas</h1>
-            <p class="tagline fade-in">Exploring the intersection of code, creativity, and artificial intelligence.</p>
-        </div>
-    </header>
-    
-    <main id="main">
-        <div class="container">
-            <section class="projects-section">
-                <h2 class="sr-only">Projects</h2>
-                <div class="grid">
-                    <!-- Project 1 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">Generative Art Explorer</h3>
-                            <p class="card-text">Interactive canvas that creates abstract art based on user movements and inputs.</p>
-                            <div>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">Canvas API</span>
-                                <span class="tag">Generative Art</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for Generative Art Explorer">View Project</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 2 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">Neural Text Adventure</h3>
-                            <p class="card-text">Text-based adventure game powered by AI that creates unique storylines for each player.</p>
-                            <div>
-                                <span class="tag">AI</span>
-                                <span class="tag">JavaScript</span>
-                                <span class="tag">Game</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for Neural Text Adventure">View Project</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 3 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">Weather Visualization</h3>
-                            <p class="card-text">Data visualization tool that transforms weather data into beautiful interactive visuals.</p>
-                            <div>
-                                <span class="tag">D3.js</span>
-                                <span class="tag">API</span>
-                                <span class="tag">Data Viz</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for Weather Visualization">View Project</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 4 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">Voice-Controlled Game</h3>
-                            <p class="card-text">Experimental game that uses voice commands for player controls and interactions.</p>
-                            <div>
-                                <span class="tag">Web Speech API</span>
-                                <span class="tag">Game Dev</span>
-                                <span class="tag">Accessibility</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for Voice-Controlled Game">View Project</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 5 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">AI Image Translator</h3>
-                            <p class="card-text">Tool that transforms text descriptions into visual interpretations using AI models.</p>
-                            <div>
-                                <span class="tag">AI</span>
-                                <span class="tag">Computer Vision</span>
-                                <span class="tag">API</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for AI Image Translator">View Project</a>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 6 -->
-                    <article class="card fade-in">
-                        <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true"></div>
-                        <div class="card-content">
-                            <h3 class="card-title">Code Poetry Generator</h3>
-                            <p class="card-text">A fusion of coding and poetry that generates unique verses based on programming concepts.</p>
-                            <div>
-                                <span class="tag">NLP</span>
-                                <span class="tag">Creative Coding</span>
-                                <span class="tag">Art</span>
-                            </div>
-                            <a href="#" class="btn" aria-label="View project details for Code Poetry Generator">View Project</a>
-                        </div>
-                    </article>
+<a href="#main" class="skip-to-content">Skip to main content</a>
+<div id="particles-js" class="particles-js"></div>
+
+<header>
+<div class="container">
+    <h1 class="site-name fade-in">Jerlyn's Neural Canvas</h1>
+    <p class="tagline fade-in">Exploring the intersection of code, creativity, and artificial intelligence.</p>
+</div>
+</header>
+
+<main id="main">
+<div class="container">
+    <section class="projects-section">
+        <h2 class="sr-only">Projects</h2>
+        <div class="grid">
+            <!-- Project 1 -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('pharm.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
                 </div>
-            </section>
-            
-            <section class="about-section fade-in">
-                <div class="container">
-                    <h2>About Me</h2>
-                    <div class="about-content">
-                        <img src="/api/placeholder/300/300" alt="Profile picture" class="profile-img">
-                        <div>
-                            <p>Hello! I'm Jerlyn, an Experience Design Director from the Commonwealth of Dominica with a passion for creating at the intersection of technology and creativity.</p>
-                            <p>As a professional member of the iAAP and an Adobe Community Expert, I'm deeply committed to accessible design that works for everyone. When I'm not coding or designing, you might find me running ultramarathons or working on my next book or illustration.</p>
-                            <p>This portfolio showcases my experiments with generative AI, interactive experiences, and creative coding. I believe in the power of STEAM (Science, Technology, Engineering, Art, and Math) to solve problems and create meaningful experiences.</p>
-                            <a href="#" class="btn" aria-label="Learn more about Jerlyn">Learn More</a>
-                        </div>
+                <div class="card-content">
+                    <h3 class="card-title">Vaccine Wordle</h3>
+                    <p class="card-text">Wordle inspired game with vaccine words</p>
+
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/vaccine-wordle/" class="btn" aria-label="View project details for Vaccine Wordle" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                     </div>
                 </div>
-            </section>
+            </article>
+            
+            <!-- Project 2 -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('Connect.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Vax Connect</h3>
+                    <p class="card-text">VaxConnect is a word association puzzle game inspired by the New York Times Connections game but with a vaccine-themed twist.</p>
+
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/vaxconnect/" class="btn" aria-label="View project details for Vax Connect" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 3 -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('FirstLetter.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">First Letter Friends</h3>
+                    <p class="card-text">A fun educational game for toddlers to learn animal names and their starting letters.</p>
+
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/first-letter-friends/" class="btn" aria-label="View project details for First Letter Friends" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 4 -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('Memory.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Memory Match</h3>
+                    <p class="card-text">A kid-friendly, accessible memory matching game designed for toddlers to learn letter and number recognition. This mobile-first game focuses on educational value while providing an engaging, accessible experience.</p>
+
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/memory-match-abc/" class="btn" aria-label="View project details for Memory Match" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 5 (Disabled) -->
+            <article class="card fade-in card-disabled">
+                <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">PharmaLex</h3>
+                    <p class="card-text">Pharmaceutical Advertising Glossary</p>
+                    
+                    <div class="btn-container">
+                        <span class="btn btn-disabled" aria-label="PharmaLex project coming soon">Coming Soon <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 6 (Disabled) -->
+            <article class="card fade-in card-disabled">
+                <div class="card-img" style="background-image: url('/api/placeholder/400/320');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">VaxLinks</h3>
+                    <p class="card-text">VaxLink is a word-finding puzzle game inspired by NYT Strands, with vaccine-related terminology as the theme.</p>
+               
+                    <div class="btn-container">
+                        <span class="btn btn-disabled" aria-label="VaxLinks project coming soon">Coming Soon <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                    </div>
+                </div>
+            </article>
         </div>
-    </main>
+    </section>
     
-    <footer>
+    <!-- Updated About Section -->
+    <section class="about-section fade-in">
         <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/Jerlyn" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="profile-container">
+                    <img src="me.webp" alt="Profile picture" class="profile-img">
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm Jerlyn, an Experience Design Director from the Commonwealth of Dominica with a passion for creating at the intersection of technology and creativity.</p>
+                    <p>As a professional member of the iAAP and an Adobe Community Expert, I'm deeply committed to accessible design that works for everyone. When I'm not coding or designing, you might find me running ultramarathons or working on my next book or illustration.</p>
+                    <p>This portfolio showcases my experiments with generative AI, interactive experiences, and creative coding. I believe in the power of STEAM (Science, Technology, Engineering, Art, and Math) to solve problems and create meaningful experiences.</p>
+                    <div class="btn-container">
+                        <a href="http://www.designlady.com/" class="btn" aria-label="Learn more about Jerlyn">Learn More <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
             </div>
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Jerlyn's Neural Canvas | Designed & Developed by Jerlyn</p>
         </div>
-    </footer>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    
-    <script>
-        // Initialize particles.js
-        document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#ffffff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": false,
-                        "anim": {
-                            "enable": false,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 3,
-                        "random": true,
-                        "anim": {
-                            "enable": false,
-                            "speed": 40,
-                            "size_min": 0.1,
-                            "sync": false
-                        }
-                    },
+    </section>
+</div>
+</main>
+
+<footer>
+<div class="container">
+    <div class="social-links">
+        <a href="https://github.com/Jerlyn" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/jerlyn/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://x.com/jerlyn" aria-label="Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+    </div>
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Jerlyn's Neural Canvas | Designed & Developed by Jerlyn</p>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
+<script>
+// Initialize particles.js
+document.addEventListener('DOMContentLoaded', function() {
+    particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ffffff"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ffffff",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 2,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "grab"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 140,
                     "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#ffffff",
-                        "opacity": 0.4,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
+                        "opacity": 1
                     }
                 },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 140,
-                            "line_linked": {
-                                "opacity": 1
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
                 },
-                "retina_detect": true
-            });
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+});
+
+// Fade-in animation for elements when they come into view
+document.addEventListener('DOMContentLoaded', function() {
+    const fadeElems = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
+            }
         });
-        
-        // Fade-in animation for elements when they come into view
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElems = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            fadeElems.forEach(elem => {
-                elem.style.opacity = 0;
-                elem.style.transform = 'translateY(20px)';
-                elem.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(elem);
-            });
-        });
-    </script>
+    }, {
+        threshold: 0.1
+    });
+    
+    fadeElems.forEach(elem => {
+        elem.style.opacity = 0;
+        elem.style.transform = 'translateY(20px)';
+        elem.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(elem);
+    });
+});
+</script>
 </body>
 </html>
