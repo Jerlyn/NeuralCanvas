@@ -158,14 +158,9 @@ header {
     position: relative;
 }
 
+/* Removed line above card content and added it below card title */
 .card-content::before {
-    content: '';
-    position: absolute;
-    left: 2rem;
-    top: 0;
-    width: 40px;
-    height: 3px;
-    background: var(--gradient-2);
+    display: none;
 }
 
 .card-title {
@@ -176,6 +171,18 @@ header {
     line-height: 1.2;
     position: relative;
     display: inline-block;
+    padding-bottom: 0.8rem;
+}
+
+/* Added line below card title */
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--gradient-2);
 }
 
 .card-text {
@@ -620,8 +627,8 @@ h2 {
                 </div>
             </article>
             
-            <!-- Project 5 (Disabled) -->
-            <article class="card fade-in card-disabled">
+            <!-- Project 5 (Digital Navigation Helper) -->
+            <article class="card fade-in">
                 <div class="card-img" style="background-image: url('DigiNav.png');" aria-hidden="true">
                     <div class="project-icon" aria-hidden="true"></div>
                 </div>
@@ -631,14 +638,12 @@ h2 {
                     
                     <div class="btn-container">
                         <a href="https://jerlyn.github.io/Digital-Navigation-Helper/" class="btn" aria-label="View project details for Digital Navigation Helper" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-                   
-                       <!-- <span class="btn btn-disabled" aria-label="Digital Navigation Helper">Coming Soon <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>-->
                     </div>
                 </div>
             </article>
             
-            <!-- Project 6 (Disabled) -->
-            <article class="card fade-in card-disabled">
+            <!-- Project 6 (Vaccine Jeopardy) -->
+            <article class="card fade-in">
                 <div class="card-img" style="background-image: url('jeopardy.png');" aria-hidden="true">
                     <div class="project-icon" aria-hidden="true"></div>
                 </div>
@@ -648,7 +653,104 @@ h2 {
                
                     <div class="btn-container">
                         <a href="https://jerlyn.github.io/vaccine-jeopardy/" class="btn" aria-label="View project details for Vaccine Jeopardy" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-                   
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Second Row of Projects - Fixed to properly include the Pacman, TicTacToe, and Number Game -->
+        <h2 class="sr-only">Arcade Games</h2>
+        <div class="grid">
+            <!-- Pacman -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('Pacman.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Pacman</h3>
+                    <p class="card-text">A beautiful, colorful, and accessible version of the classic Pac-Man game built with HTML5, CSS3, and JavaScript.</p>
+               
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/Pacman/" class="btn" aria-label="View project details for Pacman" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- TicTacToe -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('TicTacToe.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">TicTacToe</h3>
+                    <p class="card-text">A game in which two players seek in alternate turns to complete a row, a column, or a diagonal with three of their icons drawn in the spaces of a grid of nine squares.</p>
+                    
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/TicTacToe/" class="btn" aria-label="View project details for Tic Tac Toe" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Number Game -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('Number.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Number Game</h3>
+                    <p class="card-text">A simple but engaging number recognition game</p>
+               
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/toddler-number-game/" class="btn" aria-label="View project details for the Number Game" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Third Row of Projects -->
+        <h2 class="sr-only">More Projects</h2>
+        <div class="grid">
+            <!-- Project 7 (Gen AI Tetris) -->
+            <article class="card fade-in">
+                <div class="card-img" style="background-image: url('Tetris.png');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Gen AI Tetris</h3>
+                    <p class="card-text">A generative AI retro tetris</p>
+               
+                    <div class="btn-container">
+                        <a href="https://jerlyn.github.io/GenAITetris/" class="btn" aria-label="View project details for Gen AI Tetris" target="_blank">View Project <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 8 -->
+            <article class="card fade-in card-disabled">
+                <div class="card-img" style="background-image: url('https://api.placeholder.com/300/200');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">AR Learning Spaces</h3>
+                    <p class="card-text">An augmented reality app that transforms physical spaces into interactive learning environments, making education more engaging and accessible for all learning styles.</p>
+               
+                    <div class="btn-container">
+                        <span class="btn btn-disabled" aria-label="AR Learning Spaces coming soon">Coming Soon <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Project 9 -->
+            <article class="card fade-in card-disabled">
+                <div class="card-img" style="background-image: url('https://api.placeholder.com/300/200');" aria-hidden="true">
+                    <div class="project-icon" aria-hidden="true"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Dominica Nature Trails</h3>
+                    <p class="card-text">An interactive guide to the beautiful hiking trails of Dominica, featuring accessibility information, virtual tours, and environmental education resources.</p>
+               
+                    <div class="btn-container">
+                        <span class="btn btn-disabled" aria-label="Dominica Nature Trails coming soon">Coming Soon <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
                     </div>
                 </div>
             </article>
